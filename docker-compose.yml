@@ -8,7 +8,9 @@ services:
     ports:
       - "80:80"
     volumes:
-      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - "./vhost.d:/etc/nginx/vhost.d"
+      - ./conf.d/my_conf.conf:/etc/nginx/conf.d/my_conf.conf
+      - "/var/run/docker.sock:/tmp/docker.sock:ro"
 
   whoami:
     image: jwilder/whoami
