@@ -4,7 +4,7 @@ services:
     image: jwilder/nginx-proxy
     container_name: nginx-proxy
     networks:
-      - reverseproxy_default
+      - webproxy
     ports:
       - "80:80"
     volumes:
@@ -12,13 +12,7 @@ services:
       - ./conf.d/my_conf.conf:/etc/nginx/conf.d/my_conf.conf
       - "/var/run/docker.sock:/tmp/docker.sock:ro"
 
-  whoami:
-    image: jwilder/whoami
-    environment:
-      - VIRTUAL_HOST=whoami.local
-    networks:
-      - reverseproxy_default
-
 networks:
-  reverseproxy_default:
-    name: reverseproxy_default
+    webproxy:
+        external:
+            name: webproxy
